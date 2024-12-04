@@ -42,13 +42,13 @@ def enter_input():
 
 phone = Device(DEVICE_SERIAL) # Get a reference to the device
 
-enter_input()
+response_json = enter_input()
 
 while(response_json['command'] != "end" or response_json['command'] != "error"):
     
-    response: ChatResponse = llm_client.chat(model=LLM_MODEL, messages=[{'role':'user','content':prompt}])
-    response_json = json.loads(response['message']['content'])
+    response_json = enter_input
     print(response_json)
+    phone.press(response_json['command'])
 
 
 
