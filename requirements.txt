@@ -1,0 +1,16 @@
+# Core testing frameworks
+uiautomator
+pytest
+pytest-html
+
+# LLM and API interactions
+requests
+ollama
+python-dotenv
+
+# Logging and monitoring
+loguru
+
+# Testing utilities
+coverage
+pytest-cov
