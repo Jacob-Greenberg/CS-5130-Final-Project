@@ -35,9 +35,10 @@ def enter_input():
         hierarchy = hierarchy.join(file)
     
     # Plug everything into a chat
-    response: ChatResponse = llm_client.chat(model=LLM_MODEL, messages=[{'role':'user','content': hierarchy}, {'role':'system', 'content':prompt}])
+    #response: ChatResponse = llm_client.chat(model=LLM_MODEL, messages=[ {'role':'user','content': hierarchy}, {'role':'system', 'content':prompt}]) # for uncensored
+    response: ChatResponse = llm_client.chat(model=LLM_MODEL, messages=[{'role':'user','content': hierarchy}, {'role':'user', 'content':prompt}]) # for 3.2
     print("==========")
-    print(response)
+    print(response['message']['content'])
     print("==========")
     response_json = json.loads(response['message']['content'])
     return response_json
