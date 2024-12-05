@@ -18,7 +18,7 @@ DO NOT INCLUDE any other text or formatting except for the JSON key value pair (
 
 For example:
 {"command":"touch 123 123"}
-{"command":"touch 123 123 123 123 50"}
+{"command":"swipe 123 123 123 123 50"}
 {"command":"text hello"}
 {"command":"key 3"}
 

@@ -1,0 +1,4 @@
+prompt_file: "prompt.txt"
+llm_model: "llama3.2:3b"
+ollama_host: "127.0.0.1:11434"
+device_id: null  # Optional, for targeting specific devices

@@ -6,6 +6,7 @@ pytest-html
 # LLM and API interactions
 requests
 ollama
+pyyaml
 python-dotenv
 
 # Logging and monitoring
