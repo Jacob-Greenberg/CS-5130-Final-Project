@@ -23,8 +23,8 @@ llm_client = Client(
 )
 
 ti = TouchInterface()
-
-def enter_input():
+messages=[]
+def enter_input(messages):
 
     # Get current screen XML
     ti.dump_ui_hierarchy()
@@ -36,11 +36,12 @@ def enter_input():
     
     # Plug everything into a chat
     #response: ChatResponse = llm_client.chat(model=LLM_MODEL, messages=[ {'role':'user','content': hierarchy}, {'role':'system', 'content':prompt}]) # for uncensored
-    response: ChatResponse = llm_client.chat(model=LLM_MODEL, messages=[{'role':'user','content': hierarchy}, {'role':'user', 'content':prompt}]) # for 3.2
+    response: ChatResponse = llm_client.chat(model=LLM_MODEL,messages=messages + [{'role':'user','content': hierarchy}, {'role':'user', 'content':prompt}] ) # for 3.2
     print("==========")
     print(response['message']['content'])
     print("==========")
-    response_json = json.loads(response['message']['content'])
+    messages += [{'role':'assistant', 'content':response['message']['content']}, {'role':'user','content': hierarchy}]
+    response_json = json.loads(response['message']['content'].replace("<|eom_id|>", ""))
     return response_json
 
 def preform_action(action: json):
@@ -74,10 +75,10 @@ def preform_action(action: json):
         # AI gave us an invalid response
 
 print("Querying LLM")
-response_json = enter_input()
+response_json = enter_input(messages)
 preform_action(response_json)
 
 while(response_json['command'] != "end" or response_json['command'] != "error"):
     
-    response_json = enter_input()
+    response_json = enter_input(messages)
     preform_action(response_json)
