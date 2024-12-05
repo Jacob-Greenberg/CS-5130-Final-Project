@@ -1,2 +1,4 @@
 window_dump.*
 __pycache__
+.venv/
+.env

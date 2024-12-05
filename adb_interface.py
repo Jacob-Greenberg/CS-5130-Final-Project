@@ -3,7 +3,7 @@ import subprocess
 class TouchInterface:
     """ This class handles screen inputs. It assumes that only one devices is connected via ADB """
     def __init__(self):
-        self.adb_path = "C:\\Users\\green\\Desktop\\Advanced Software Engineering - CS 5130\\Final Project\\platform-tools\\adb.exe"
+        self.adb_path = r'C:\Fall 2024\Adv SE\Final Project\platform-tools\adb.exe'
 
     def touch(self, x: int, y: int):
         """
