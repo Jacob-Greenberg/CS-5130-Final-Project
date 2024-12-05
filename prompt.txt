@@ -8,9 +8,10 @@ Some keywords accept parameters which will be marked by `<X>` where X is the par
 
 touch <X Pixel> <Y Pixel>
 swipe <X Starting Pixel> <Y Starting Pixel> <X Ending Pixel> <Y Ending Pixel> <Duration (ms)>
-text <text to enter>
+text '<text to enter>'
 key <android numeric keycode>
 
+You may also touch an application icon by finding its bounding coordinates in the XML and touching within the bounding box.
 You may also use the "end" keyword signify you are done testing or the "error" keyword if you get into an unexpected state.
 
 Your response should be in the form of a JSON key value pair where the key is "command" and the value is one of the keywords.

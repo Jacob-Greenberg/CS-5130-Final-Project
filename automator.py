@@ -42,9 +42,9 @@ def enter_input(messages):
     print("==========")
     messages += [{'role':'assistant', 'content':response['message']['content']}, {'role':'user','content': hierarchy}]
     response_json = json.loads(response['message']['content'].replace("<|eom_id|>", ""))
-    return response_json
+    return response_json, hierarchy
 
-def preform_action(action: json):
+def preform_action(action: json, hierarchy):
     try:
         if 'touch' in action['command']: # touch <X Pixel> <Y Pixel>
             x = action['command'].split(" ")[1]
@@ -60,8 +60,10 @@ def preform_action(action: json):
             ti.swipe(x_start, y_start, x_end, y_end, duration)
 
         elif 'text' in action['command']: # text <text to enter>
-            text = action['command'].split(" ")[1]
+            text = action['command'].split(" ", 1)[1]
+            text = f"""'{text}'"""
             ti.text(text)
+            ti.key("66") # Press enter
 
         elif 'key' in action['command']: # key <android/adb keycode>
             keycode = action['command'].split(" ")[1]
@@ -75,10 +77,11 @@ def preform_action(action: json):
         # AI gave us an invalid response
 
 print("Querying LLM")
-response_json = enter_input(messages)
-preform_action(response_json)
+response_json, hierarchy = enter_input(messages)
+preform_action(response_json, hierarchy)
 
 while(response_json['command'] != "end" or response_json['command'] != "error"):
     
-    response_json = enter_input(messages)
-    preform_action(response_json)
+    response_json, hierarchy = enter_input(messages)
+    preform_action(response_json, hierarchy)
+    print(f"{len(messages)} messages")

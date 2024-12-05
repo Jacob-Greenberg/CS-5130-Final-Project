@@ -1,4 +1,5 @@
 import subprocess
+import xml.etree.ElementTree as ET
 
 class TouchInterface:
     """ This class handles screen inputs. It assumes that only one devices is connected via ADB """
